@@ -26,6 +26,7 @@ const Login = () => {
   }, [jwt]);
 
   const onSubmit = async (data) => {
+    console.log(data);
     setLoginState("loading");
     loadingToast();
     try {
