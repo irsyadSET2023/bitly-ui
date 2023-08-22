@@ -34,12 +34,13 @@ const Register = () => {
       serverErrors.map((serverError) =>
         setError(serverError.path, { message: serverError.msg })
       );
+      setRegisterState("pending");
     }
   };
   return (
     <div className="w-screen min-h-screen flex flex-col justify-center items-center bg-pink-800">
       <Logo />
-      {registerState === "pending" && (
+      {(registerState === "pending" || registerState === "loading") && (
         <div className="bg-white min-w-[600px] p-2 space-y-2">
           Register
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
@@ -92,7 +93,7 @@ const Register = () => {
           </form>
         </div>
       )}
-      {registerState === "loading" && <ToastContainer />}
+
       {registerState == "success" && (
         <div>
           <h1 className="text-3xl">Thanks for Sign In</h1>
@@ -101,6 +102,7 @@ const Register = () => {
           </Link>
         </div>
       )}
+      {registerState === "loading" && <ToastContainer />}
     </div>
   );
 };

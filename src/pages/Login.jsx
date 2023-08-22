@@ -38,12 +38,29 @@ const Login = () => {
       console.log(userLogin.jwt);
       setJwt(userLogin.jwt);
     } catch (error) {
-      console.log(error.response.data.err.errors);
-      const serverErrors = error?.response?.data?.err?.errors || [];
       setLoginState("error");
-      serverErrors.map((serverError) =>
-        setError(serverError.path, { message: serverError.msg })
-      );
+      setError("identifier", { message: "Invalid Credential" });
+      setError("password", { message: "Invalid Credential" });
+      // console.log(error);
+      // console.log("Status", error.response.status);
+      // const statusCode = error.response.status;
+
+      // if (statusCode === 401) {
+      //   setError("identifier", { message: "Invalid Credential" });
+      //   setError("password", { message: "Invalid Credential" });
+      //   // const serverErrors401 = error?.response?.data || [];
+      //   // setLoginState("error");
+      //   // serverErrors401.map((serverError401) =>
+      //   //   setError(serverError401.path, { message: serverError401.msg })
+      //   // );
+      // } else {
+      //   console.log(error.response.data.err.errors);
+      //   const serverErrors = error?.response?.data?.err?.errors || [];
+      //   setLoginState("error");
+      //   serverErrors.map((serverError) =>
+      //     setError(serverError.path, { message: serverError.msg })
+      //   );
+      // }
     }
   };
 
@@ -66,7 +83,7 @@ const Login = () => {
           <label htmlFor="">Password</label>
           <input
             className="block border border-black w-[100%]"
-            type="text"
+            type="password"
             {...register("password", { required: true })}
           />
           {errors.password && (
