@@ -17,13 +17,13 @@ const Login = () => {
   } = useForm();
   // const onSubmit = (data) => console.log(data);
   const [loginState, setLoginState] = useState("pending");
-  const { jwt, setJwt } = useContext(AuthContext);
+  const { jwtCookie, setJwtCookie } = useContext(AuthContext);
   const navigate = useNavigate();
   useEffect(() => {
-    if (jwt) {
+    if (jwtCookie) {
       navigate("/dashboard");
     }
-  }, [jwt]);
+  }, [jwtCookie]);
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -36,31 +36,11 @@ const Login = () => {
       });
       setLoginState("success");
       console.log(userLogin.jwt);
-      setJwt(userLogin.jwt);
+      setJwtCookie(userLogin.jwt);
     } catch (error) {
       setLoginState("error");
       setError("identifier", { message: "Invalid Credential" });
       setError("password", { message: "Invalid Credential" });
-      // console.log(error);
-      // console.log("Status", error.response.status);
-      // const statusCode = error.response.status;
-
-      // if (statusCode === 401) {
-      //   setError("identifier", { message: "Invalid Credential" });
-      //   setError("password", { message: "Invalid Credential" });
-      //   // const serverErrors401 = error?.response?.data || [];
-      //   // setLoginState("error");
-      //   // serverErrors401.map((serverError401) =>
-      //   //   setError(serverError401.path, { message: serverError401.msg })
-      //   // );
-      // } else {
-      //   console.log(error.response.data.err.errors);
-      //   const serverErrors = error?.response?.data?.err?.errors || [];
-      //   setLoginState("error");
-      //   serverErrors.map((serverError) =>
-      //     setError(serverError.path, { message: serverError.msg })
-      //   );
-      // }
     }
   };
 

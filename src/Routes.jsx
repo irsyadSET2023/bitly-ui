@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import React from "react";
+import Links from "./pages/Links";
 
 const Routes = () => {
   const router = createBrowserRouter([
@@ -21,6 +22,10 @@ const Routes = () => {
     {
       path: "/dashboard",
       element: <Dashboard />,
+    },
+    {
+      path: "/links",
+      element: <Links />,
     },
   ]);
 

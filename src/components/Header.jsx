@@ -1,14 +1,11 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../App";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const loadingToast = () => toast("Logging Out....");
 const Header = () => {
-  const { setJwt, setJwtCookie } = useContext(AuthContext);
+  const { setJwtCookie } = useContext(AuthContext);
   const navigate = useNavigate();
   const handleLogout = () => {
-    setJwt(null);
     setJwtCookie(null);
     navigate("/login");
   };
