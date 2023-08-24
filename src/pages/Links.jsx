@@ -48,7 +48,7 @@ const Links = () => {
 
   const showQR = (slugLink) => {
     setModalState(true);
-    setQrCodeVal(slugLink);
+    setQrCodeVal(BASE_URL + slugLink);
     setModalSetup("qr");
   };
 
