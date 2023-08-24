@@ -5,6 +5,7 @@ import { postLoginUser } from "../utils/api";
 import { AuthContext } from "../App";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Logo from "./Logo";
 
 const loadingToast = () => toast("Logging In....");
 const Login = () => {
@@ -45,7 +46,8 @@ const Login = () => {
   };
 
   return (
-    <div className="w-screen min-h-screen flex flex-col justify-center items-center bg-pink-800">
+    <div className="w-screen min-h-screen flex flex-col justify-center items-center bg-pink-800 gap-20">
+      <Logo />
       <div className="bg-white min-w-[600px] p-2 flex flex-col gap-3">
         Login
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">

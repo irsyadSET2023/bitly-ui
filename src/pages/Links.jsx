@@ -84,7 +84,6 @@ const Links = () => {
   const checkEdit = async (divId, buttonId) => {
     setEditState(false);
     const divElement = document.getElementById(divId);
-
     const buttonElement = document.getElementById(buttonId);
     const text = document.getElementById(divId).textContent;
     console.log("Check Edit", text);
@@ -127,7 +126,7 @@ const Links = () => {
                 <th>QR Code</th>
                 <th>Visit count</th>
                 <th>Created at</th>
-                <th>Action</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -208,9 +207,9 @@ const Row = ({
           View
         </h1>
       </td>
-      <td>{column.visit_counts}</td>
+      <td className="text-center">{column.visit_counts}</td>
       <td>{new Date(column.created_at).toLocaleString()}</td>
-      <td className="flex gap-2 text-center">
+      <td className="text-center">
         <button
           onClick={() => handleDelete(column.slug)}
           className="text-center"

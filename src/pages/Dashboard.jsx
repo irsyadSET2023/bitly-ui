@@ -1,8 +1,9 @@
-import React from "react";
-import Header from "../components/Header";
-import { useProtectedPage } from "../utils/hooks/useProtectedPage";
+import React, { useState } from "react";
 import DashboardLayout from "../layouts/DashboardLayout";
 import useGetAllLinks from "../utils/hooks/useGetAllLinks";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const loadingToast = () => toast("Fetching Data....");
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -51,12 +52,10 @@ export const options = {
 
 const Dashboard = () => {
   const { fetchDataState, dataState, jwtCookie, fetchLinks } = useGetAllLinks();
+  const [buttonState, setButtonState] = useState("pending");
 
   const labels = dataState.map((element) => element.slug);
-  const visitCount = dataState.map((element) =>
-    Math.round(element.visit_counts)
-  );
-  console.log(visitCount);
+  const visitCount = dataState.map((element) => element.visit_counts);
   const data = {
     labels,
     datasets: [
@@ -69,11 +68,28 @@ const Dashboard = () => {
     ],
   };
 
+  const fetchData = () => {
+    loadingToast();
+    setTimeout(() => {
+      fetchLinks();
+    }, 1000);
+  };
+
   return (
     <DashboardLayout>
-      <div>Dashboard</div>
-      <button onClick={fetchLinks}>Fetch</button>
-      <Bar options={options} data={data} />
+      <div className="bg-pink-100 h-screen flex flex-col justify-between flex-grow">
+        <h1 className="text-5xl text-pink-400 text-bold text-center">
+          Dashboard
+        </h1>
+        <button
+          className="flex justify-center text-2xl text-pink-400 text-bold text-center"
+          onClick={fetchData}
+        >
+          <div className="bg-pink-800 w-[300px]"> Fetch</div>
+        </button>
+        <Bar className="" options={options} data={data} />
+      </div>
+      <ToastContainer />
     </DashboardLayout>
   );
 };
