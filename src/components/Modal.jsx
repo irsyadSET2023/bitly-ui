@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../App";
 import { addLink } from "../utils/api";
+import QRCode from "react-qr-code";
 
 const Modal = ({ showModal = false, setShow, children }) => {
   const handleModalClose = () => {
@@ -23,6 +24,17 @@ const Modal = ({ showModal = false, setShow, children }) => {
         </div>
       </div>
     )
+  );
+};
+
+export const ModalQRCode = ({ value }) => {
+  return (
+    <QRCode
+      size={256}
+      style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+      value={value}
+      viewBox={`0 0 256 256`}
+    />
   );
 };
 
@@ -58,6 +70,9 @@ export const ModalAddLink = ({
           type="text"
           {...register("link", { required: true })}
         />
+        <button className="bg-pink-500" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );
